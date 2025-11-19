@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="scripts/login.js" defer></script>
+</head>
+
+<body>
+    <div class="d-flex min-vw-100">
+        <div class="min-vw-50 h-100 bg-white">
+            <img class="img" src="assest/Logo.png.png" class="img-fluid" alt="...">
+        </div>
+
+        <div class="min-vh-100 min-vw-50 d-flex align-items-center justify-content-center">
+            <div class="card d-flex justify-content-center align-items-center p-4 w-50">
+
+                <form class="flex-column gap-4 w-100 d-flex" id="login">
+                    <h5>Login</h5>
+                    <div>
+                        <input id="E-mail" type="email" class="form-control" autocomplete="new-email"
+                            placeholder="E-mail" aria-label="E-mail" required>
+                    </div>
+                    <div>
+                        <input id="password" type="password" class="form-control" autocomplete="new-password"
+                            placeholder="Senha" aria-label="password" required>
+                    </div>
+                    <button form="login" type="button" onclick="loginUser()" class="btn btn-primary">
+                        Logar
+                    </button>
+
+                    <div class="d-flex justify-content-center gap-2">
+                        <span class="toggle" style="cursor: pointer; text-decoration: none;"
+                            onclick="alternarTela()">Não tem conta?
+                            Cadastre-se</span>
+                    </div>
+                </form>
+
+                <form class="d-none flex-column gap-4 w-100" id="cadastro">
+                    <h5>Criar Conta</h5>
+                    <input id="create-name" type="text" class="form-control" placeholder="Nome" aria-label="name"
+                        required>
+                    <input id="create-email" type="email" class="form-control" placeholder="E-mail" aria-label="E-mail"
+                        required>
+                    <input id="create-password" type="password" class="form-control" placeholder="Senha"
+                        aria-label="password" required>
+
+                    <button form="cadastro" type="button" class="btn btn-primary"
+                        onclick="createUserOnSupabase()">Criar</button>
+                    <div class="d-flex justify-content-center gap-2">
+                        <span class="toggle" style="cursor: pointer; text-decoration: none;" onclick="alternarTela()">Já
+                            tem conta? Entrar</span>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</html>

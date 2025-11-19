@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/habitos.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="scripts/habitos.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+</head>
+
+<body>
+    <div class="sair">
+        <div id="perfil" class="perfil"></div>
+        <button type="button" class="btn" onclick="sair()">Sair</button>
+    </div>
+
+    <div class="form-container">
+        <h2 class="form-title">Cadastrar Novo Hábito</h2>
+
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="habitName" class="form-label">Nome do Hábito</label>
+                <input type="text" class="form-control" id="habitName" placeholder="Ex: Ler 10 minutos por dia">
+            </div>
+
+            <div class="col-md-6">
+                <label for="habitCategory" class="form-label">Categoria</label>
+                <select id="habitCategoria" class="form-select">
+                    <option selected>Escolha...</option>
+                    <option>Saúde</option>
+                    <option>Estudo</option>
+                    <option>Produtividade</option>
+                    <option>Espiritualidade</option>
+                    <option>Outro</option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label for="habitDescription" class="form-label">Descrição</label>
+                <input type="text" class="form-control" id="habitDescricao"
+                    placeholder="Por que esse hábito é importante pra você?">
+            </div>
+
+
+            <div class="col-md-6">
+                <label for="habitTime" class="form-label">Horário Ideal</label>
+                <input type="time" class="form-control" id="habitHorario">
+            </div>
+
+            <div class="col-md-6">
+                <label for="habitGoal" class="form-label">Meta Diária</label>
+                <input type="text" class="form-control" id="habitMeta" placeholder="Ex: 20 páginas / 30 minutos">
+            </div>
+
+            <div class="dias-semana">
+                <label>Dias da semana:</label>
+                <div class="dias" id="diasSemanas">
+
+                    <button type="button" class="dia" data-dia="Segunda" id="Segunda">S</button>
+                    <button type="button" class="dia" data-dia="Terça" id="Terça">T</button>
+                    <button type="button" class="dia" data-dia="Quarta" id="Quarta">Q</button>
+                    <button type="button" class="dia" data-dia="Quinta" id="Quinta">Q</button>
+                    <button type="button" class="dia" data-dia="Sexta" id="Sexta">S</button>
+                    <button type="button" class="dia" data-dia="Sábado" id="Sabado">S</button>
+                    <button type="button" class="dia" data-dia="Domingo" id="Domingo">D</button>
+
+                </div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-voltar" onclick="voltar()"><i class="bi bi-house"></i>
+                </button>
+                <button type="submit" class="btn btn-salvar" onclick="salvarHabitos(event)"> <i
+                        class="fa-regular fa-bookmark "></i></button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</html>

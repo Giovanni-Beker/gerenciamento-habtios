@@ -1,0 +1,57 @@
+create table historico_habitos (
+    id bigint generated always as identity primary key,
+    habito_id bigint references habitos(id) on delete cascade,
+    data date not null,
+    realizado boolean not null default false,
+    usuario_id uuid not null
+);
+
+
+Tabela historico_habitos
+
+create policy "Usuarios veem apenas seus dados"
+on historico_habitos
+for select
+using ( auth.uid() = usuario_id );
+
+create policy "Usuarios inserem apenas seus dados"
+on historico_habitos
+for insert
+with check ( auth.uid() = usuario_id );
+
+create policy "Usuarios atualizam apenas seus dados"
+on historico_habitos
+for update
+using ( auth.uid() = usuario_id );
+
+create policy "Usuarios deletam apenas seus dados"
+on historico_habitos
+for delete
+using ( auth.uid() = usuario_id );
+
+
+Tabela habitos
+
+create policy "Usuarios veem apenas seus dados"
+on habitos
+for select
+using ( auth.uid() = usuario_id );
+
+create policy "Usuarios inserem apenas seus dados"
+on habitos
+for insert
+with check ( auth.uid() = usuario_id );
+
+create policy "Usuarios atualizam apenas seus dados"
+on habitos
+for update
+using ( auth.uid() = usuario_id );
+
+create policy "Usuarios deletam apenas seus dados"
+on habitos
+for delete
+using ( auth.uid() = usuario_id );
+
+
+
+

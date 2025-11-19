@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/frequencia.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="scripts/frequencia.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+
+<body>
+
+    <div class="sair">
+        <div id="perfil" class="perfil"></div>
+        <button type="button" class="btn" onclick="sair()">Sair</button>
+    </div>
+
+
+    <div class="container mt-3">
+
+        <h1 class="text-center mb-4">Meus Hábitos</h1>
+    </div>
+
+
+    <div class="col-12 d-flex align-items-center justify-content-between mt-4 px-3">
+        <button type="button" class="btn btn-voltar" onclick="novoHabito()">Novo Habito</button>
+
+        <div class="d-flex align-items-center gap-3">
+            <div class="streak-topo">
+                <i class="bi bi-fire"></i>
+                <span id="streakTotal">0</span> 
+                <i class="bi bi-star-fill" style="color:gold;"></i>
+                <span id="pontosTotal">0</span>
+            </div>
+        </div>
+
+
+        <div class="pesquisa-area">
+            <i class="bi bi-search icone-lupa"></i>
+            <input class="form-control input-pesquisa" type="search" placeholder="Pesquisar" aria-label="Search" />
+        </div>
+
+
+    </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th><i class="bi bi-journal-text me-2"></i> Nome</th>
+                <th><i class="bi bi-folder2-open me-2"></i> Categoria</th>
+                <th><i class="bi bi-pencil-square me-2"></i> Descrição</th>
+                <th><i class="bi bi-bullseye me-2"></i> Meta Diária</th>
+                <th><i class="bi bi-clock me-2"></i> Horário</th>
+                <th><i class="bi bi-calendar-week"></i> Dias da Semana</th>
+                <th><i class="bi bi-calendar-week me-2"></i> Ações</th>
+
+            </tr>
+        </thead>
+        <tbody id="dadosGrid"></tbody>
+    </table>
+
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+
+                <div class="modal-header bg-primary text-white rounded-top-4">
+                    <h5 class="modal-title" id="editarModalLabel">Editar Hábito</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <form id="formEditar" class="row g-3">
+
+                        <div class="col-md-6">
+                            <label for="nomeHabito" class="form-label">Nome do Hábito</label>
+                            <input type="text" class="form-control" id="nomeHabito"
+                                placeholder="Ex: Ler 10 minutos por dia" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="categoriaHabito" class="form-label">Categoria</label>
+                            <select id="categoriaHabito" class="form-select">
+                                <option selected>Escolha...</option>
+                                <option>Saúde</option>
+                                <option>Estudo</option>
+                                <option>Produtividade</option>
+                                <option>Espiritualidade</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="descricaoHabito" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="descricaoHabito"
+                                placeholder="Por que esse hábito é importante pra você?">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="horarioHabito" class="form-label">Horário Ideal</label>
+                            <input type="time" class="form-control" id="horarioHabito">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="metaHabito" class="form-label">Meta Diária</label>
+                            <input type="text" class="form-control" id="metaHabito"
+                                placeholder="Ex: 20 páginas / 30 minutos">
+                        </div>
+
+                        <div class="dias-semana col-12">
+                            <label>Dias da semana:</label>
+                            <div class="dias" id="diasHabito">
+                                <button type="button" class="dia" data-dia="segunda">S</button>
+                                <button type="button" class="dia" data-dia="terça">T</button>
+                                <button type="button" class="dia" data-dia="quarta">Q</button>
+                                <button type="button" class="dia" data-dia="quinta">Q</button>
+                                <button type="button" class="dia" data-dia="sexta">S</button>
+                                <button type="button" class="dia" data-dia="sabado">S</button>
+                                <button type="button" class="dia" data-dia="domingo">D</button>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="idHabito">
+
+                        <div class="col-12 d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-voltar" onclick="voltarFrequencia()"><i
+                                    class="bi bi-house"></i></button>
+                            <button type="submit" class="btn btn-salvar" onclick="salvarEdicao(event)">
+                                <i class="fa-regular fa-bookmark "></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</html>
