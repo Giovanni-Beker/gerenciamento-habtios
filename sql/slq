@@ -32,8 +32,9 @@ on habitos
 for delete
 using ( auth.uid() = usuario_id );
 
-alter policy "Permitir que usuários deletem somente os dados deles mesmos"
-on "public"."habitos"
+create policy "Permitir que usuários deletem somente os dados deles mesmos"
+on public.habitos
+for delete
 to public
 using (
   user_id = auth.uid()
